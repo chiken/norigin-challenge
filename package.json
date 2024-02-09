@@ -4,6 +4,8 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"start": "webpack-cli serve --open --mode development",
+		"build": "webpack --mode production",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -30,6 +32,7 @@
 		"html-webpack-plugin": "^5.6.0",
 		"typescript": "^5.3.3",
 		"webpack": "^5.90.1",
-		"webpack-cli": "^5.1.4"
+		"webpack-cli": "^5.1.4",
+		"webpack-dev-server": "^4.15.1"
 	}
 }
