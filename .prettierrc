@@ -1,0 +1,10 @@
+{
+	"semi": true,
+	"tabWidth": 4,
+	"printWidth": 80,
+	"useTabs": true,
+	"singleQuote": true,
+	"trailingComma": "es5",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
+	"editor.formatOnSave": true
+}
