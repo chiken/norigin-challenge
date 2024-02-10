@@ -1,0 +1,72 @@
+import EPGSchuduleTime from './EPGSchuduleTime';
+
+interface EPGChannels {
+	channels: app.EPGChannel[];
+	PIXELS_PER_MIN: number;
+}
+
+const EPGSchedules = ({ channels, PIXELS_PER_MIN }: EPGChannels) => {
+	const calculateTimeDifferenceInMinutes = (schedule: app.EPGSchedule) => {
+		const startTime = schedule.start.split('+')[0];
+		const endTime = schedule.end.split('+')[0];
+
+		const startTimeSplit = startTime.split('T');
+		const endTimeSplit = endTime.split('T');
+
+		const startTimeOnDate: any = new Date(
+			`${startTimeSplit[0]} ${startTimeSplit[1]}`
+		);
+		const endTimeOnDate: any = new Date(
+			`${endTimeSplit[0]} ${endTimeSplit[1]}`
+		);
+
+		const differenceTime = (endTimeOnDate - startTimeOnDate) / 60000;
+
+		return {
+			scheduleStartTime: startTimeSplit[1],
+			scheduleEndTime: endTimeSplit[1],
+			differenceTime,
+		};
+	};
+
+	const renderEPGSchedule = (schedules: app.EPGSchedule[]) => {
+		return schedules.map((schedule, idx) => {
+			const { scheduleStartTime, scheduleEndTime, differenceTime } =
+				calculateTimeDifferenceInMinutes(schedule);
+
+			return (
+				<div
+					className="schedule-box"
+					key={idx}
+					style={{ width: PIXELS_PER_MIN * differenceTime }}
+				>
+					<span> {schedule.title} </span>
+					<span>
+						{scheduleStartTime} - {scheduleEndTime}
+					</span>
+				</div>
+			);
+		});
+	};
+
+	const renderEPGSchedules = () => {
+		return (
+			<>
+				{channels.map((channel, idx) => (
+					<div key={idx} className="epg-schedule">
+						{renderEPGSchedule(channel.schedules)}
+					</div>
+				))}
+			</>
+		);
+	};
+
+	return (
+		<>
+			<EPGSchuduleTime PIXELS_PER_MIN={PIXELS_PER_MIN} />
+			{renderEPGSchedules()}
+		</>
+	);
+};
+
+export default EPGSchedules;

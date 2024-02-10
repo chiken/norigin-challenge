@@ -5,6 +5,8 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "webpack-cli serve --open --mode development",
+		"start:mock-api": "./node_modules/.bin/osprey-mock-service -f ./node_modules/nm-mock-api/demo.raml -p 1337 --cors",
+		"start:api": "node ./node_modules/nm-mock-api/scripts/updateEpg.js && npm run start:mock-api",
 		"build": "webpack --mode production",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -12,9 +14,14 @@
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
+		"css-loader": "^6.10.0",
+		"nm-mock-api": "git+https://github.com/NoriginMedia/mock-api.git#cloudberry",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-router-dom": "^6.22.0",
+		"sass": "^1.70.0",
+		"sass-loader": "^14.1.0",
+		"style-loader": "^3.3.4",
 		"ts-loader": "^9.5.1"
 	},
 	"devDependencies": {

@@ -1,0 +1,56 @@
+.epg-container {
+	.epg-body {
+		display: flex;
+
+		.epg-channels {
+			display: flex;
+			flex-direction: column;
+
+			.epg-channel-item {
+				width: 75px;
+				height: $row-height;
+				background-color: $grey-dark;
+				border-bottom: 1px solid $grey;
+
+				img {
+					width: 75px;
+					height: $row-height;
+				}
+			}
+		}
+
+		.epg-schedules {
+			display: flex;
+			flex-direction: column;
+			// overflow: scroll;
+
+			.epg-schedule-time {
+				display: flex;
+				overflow-x: auto;
+				height: $row-height;
+
+				.hour {
+					background-color: $grey-dark;
+					border: 1px solid $grey;
+					color: $white;
+					text-align: center;
+					padding-top: 15px;
+				}
+			}
+
+			.epg-schedule {
+				display: flex;
+
+				.schedule-box {
+					font-size: $text-size;
+					display: flex;
+					height: $row-height;
+					color: $white;
+					background-color: $black;
+					border-bottom: 1px solid $grey;
+					border-left: 1px solid $grey;
+				}
+			}
+		}
+	}
+}
