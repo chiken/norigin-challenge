@@ -9,7 +9,7 @@ module.exports = {
 			env: {
 				node: true,
 			},
-			files: ['.eslintrc.{js,cjs}'],
+			files: ['.eslintrc.{js,cjs,tsx,json}'],
 			parserOptions: {
 				sourceType: 'script',
 			},
@@ -18,7 +18,12 @@ module.exports = {
 	parserOptions: {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
+		project: './tsconfig.json',
 	},
 	plugins: ['react'],
-	rules: {},
+	rules: {
+		'@typescript-eslint/explicit-function-return-type': 'off',
+		'react/react-in-jsx-scope': 'off',
+		'@typescript-eslint/semi': 'on',
+	},
 };
