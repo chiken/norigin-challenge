@@ -111,6 +111,11 @@
 					border-bottom: 1px solid $grey;
 					border-left: 1px solid $grey;
 
+					&:hover {
+						cursor: pointer;
+						background-color: $grey-light;
+					}
+
 					.title {
 						margin-top: 10px;
 						margin-left: 10px;

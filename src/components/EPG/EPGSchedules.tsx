@@ -8,12 +8,14 @@ interface EPGChannels {
 	channels: app.EPGChannel[];
 	currentTimeOnPixels: number;
 	scheduleRef: any;
+	setScheduleRefChanged: any;
 }
 
 const EPGSchedules = ({
 	channels,
 	currentTimeOnPixels,
 	scheduleRef,
+	setScheduleRefChanged,
 }: EPGChannels) => {
 	const { getCurrentTime, PIXELS_PER_MIN } = useContext(UtilsContext);
 
@@ -88,13 +90,23 @@ const EPGSchedules = ({
 	};
 
 	return (
-		<div className="epg-schedules" ref={scheduleRef}>
-			<div style={{ width: scheduleTotalWidth }}>
-				<EPGScheduleStick currentTimeOnPixels={currentTimeOnPixels} />
-				<EPGSchuduleTime />
-				{renderEPGSchedules()}
+		<>
+			<div
+				className="epg-schedules"
+				ref={(el) => {
+					scheduleRef.current = el;
+					setScheduleRefChanged(true);
+				}}
+			>
+				<div style={{ width: scheduleTotalWidth }}>
+					<EPGScheduleStick
+						currentTimeOnPixels={currentTimeOnPixels}
+					/>
+					<EPGSchuduleTime />
+					{renderEPGSchedules()}
+				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 
