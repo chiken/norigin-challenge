@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 import Button from '../Button';
 import EPGChannels from './EPGChannels';
 import EPGSchedules from './EPGSchedules';
+import EPGCalendar from './EPGCalendar';
 
 interface EPGTableProps {
 	data: app.EPGData;
@@ -44,7 +45,9 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 
 	return (
 		<div className="epg-table">
-			<div className="epg-header"></div>
+			<div className="epg-header">
+				<EPGCalendar />
+			</div>
 			<div className="epg-body">
 				<div className="epg-channels">
 					<EPGChannels channels={channels} />

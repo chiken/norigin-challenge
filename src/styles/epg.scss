@@ -1,6 +1,37 @@
 .epg-table {
 	position: relative;
-	// width: 100vw;
+
+	.epg-header {
+		.epg-calendar {
+			height: $row-height;
+			width: 100%;
+			background-color: $grey-dark;
+			display: flex;
+			overflow: scroll;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
+
+			.epg-calendar-day {
+				padding: 0px 40px;
+				display: flex;
+				border-right: 1px solid $grey-light;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+				color: #ccc;
+				width: 400px;
+				height: 60px;
+
+				&.today {
+					color: $white;
+					background-color: $grey-light;
+				}
+			}
+		}
+	}
+
 	.epg-body {
 		display: flex;
 
