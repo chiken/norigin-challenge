@@ -1,4 +1,6 @@
 .epg-table {
+	position: relative;
+	// width: 100vw;
 	.epg-body {
 		display: flex;
 
@@ -7,6 +9,9 @@
 			flex-direction: column;
 
 			.epg-channel-item {
+				display: flex;
+				justify-content: center;
+				align-items: center;
 				width: 75px;
 				height: $row-height;
 				background-color: $grey-dark;
@@ -14,8 +19,8 @@
 				box-sizing: border-box;
 
 				img {
-					width: 75px;
-					height: $row-height;
+					width: 50px;
+					height: 50px;
 				}
 			}
 		}
@@ -78,6 +83,21 @@
 				box-sizing: border-box;
 				border: 1px solid $orange;
 				z-index: 2222;
+			}
+		}
+
+		.epg-btn-live {
+			position: absolute;
+			background-color: $orange;
+			bottom: 50px;
+			right: 50px;
+			padding: 10px 15px;
+			color: $white;
+			border: none;
+			border-radius: 5px;
+
+			&:hover {
+				cursor: pointer;
 			}
 		}
 	}

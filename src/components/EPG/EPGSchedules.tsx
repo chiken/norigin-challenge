@@ -6,33 +6,17 @@ import EPGScheduleStick from './EPGScheduleStick';
 interface EPGChannels {
 	channels: app.EPGChannel[];
 	PIXELS_PER_MIN: number;
+	scheduleRef: any;
+	currentTimeOnPixels: number;
 }
 
-const EPGSchedules = ({ channels, PIXELS_PER_MIN }: EPGChannels) => {
+const EPGSchedules = ({
+	channels,
+	PIXELS_PER_MIN,
+	scheduleRef,
+	currentTimeOnPixels,
+}: EPGChannels) => {
 	const scheduleTotalWidth = PIXELS_PER_MIN * 60 * 24;
-
-	const scheduleRef = useRef(null);
-
-	const getCurrentTimeOnPixels = (): number => {
-		const date = new Date();
-		const hour = date.getHours();
-		const min = date.getMinutes();
-
-		return (hour * 60 + min) * PIXELS_PER_MIN;
-	};
-
-	const [currentTimeOnPixels, setCurrentTimeOnPixels] = useState(
-		getCurrentTimeOnPixels()
-	);
-
-	setInterval(() => {
-		const pixels = getCurrentTimeOnPixels();
-		setCurrentTimeOnPixels(pixels);
-	}, 60000);
-
-	useEffect(() => {
-		scheduleRef.current.scroll(currentTimeOnPixels, 0);
-	}, [currentTimeOnPixels]);
 
 	const getCurrentTime = (): string => {
 		const date = new Date();
