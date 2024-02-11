@@ -79,6 +79,7 @@
 		.epg-schedules {
 			overflow: scroll;
 			position: relative;
+			background-color: $grey-dark;
 
 			&::-webkit-scrollbar {
 				display: none;

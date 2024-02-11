@@ -13,8 +13,6 @@ interface EPGTableProps {
 }
 
 const EPGTable = ({ data, loading, error }: EPGTableProps) => {
-	const [scheduleRefChanged, setScheduleRefChanged] = useState(false);
-
 	const {
 		PIXELS_PER_MIN,
 		CHANNEL_PIXELS_WIDTH,
@@ -50,24 +48,28 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 		moveToCurrentTimeOnSchedule();
 	};
 
-	setInterval(() => {
-		const pixels = getCurrentTimeOnPixels();
-		setCurrentTimeOnPixels(pixels);
-	}, 60000);
-
 	const [currentTimeOnPixels, setCurrentTimeOnPixels] = useState(
 		getCurrentTimeOnPixels()
 	);
 
-	const scheduleRef = useRef(null);
-	const calendarRef = useRef(null);
+	const [scheduleRefChanged, setScheduleRefChanged] = useState(false);
+
+	useEffect(() => {
+		setInterval(() => {
+			const pixels = getCurrentTimeOnPixels();
+			setCurrentTimeOnPixels(pixels);
+		}, 60000);
+	}, []);
 
 	useEffect(() => {
 		moveToCurrentTimeOnCalendar();
 		moveToCurrentTimeOnSchedule();
 	}, [scheduleRefChanged]);
 
-	if (loading) return 'Loading';
+	const scheduleRef = useRef(null);
+	const calendarRef = useRef(null);
+
+	if (loading) return <div></div>;
 
 	const { channels } = data;
 

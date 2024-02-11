@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { MutableRefObject, useContext } from 'react';
 import { UtilsContext } from '../../context/UtilsContext';
 
 import EPGSchuduleTime from './EPGSchuduleTime';
@@ -7,7 +7,7 @@ import EPGScheduleStick from './EPGScheduleStick';
 interface EPGChannels {
 	channels: app.EPGChannel[];
 	currentTimeOnPixels: number;
-	scheduleRef: any;
+	scheduleRef: MutableRefObject<HTMLDivElement>;
 	setScheduleRefChanged: any;
 }
 
@@ -22,28 +22,15 @@ const EPGSchedules = ({
 	const scheduleTotalWidth = PIXELS_PER_MIN * 60 * 24;
 
 	const calculateScheduleDuration = (schedule: app.EPGSchedule) => {
-		const startTime = schedule.start.split('+')[0];
-		const endTime = schedule.end.split('+')[0];
-
-		const startTimeSplit = startTime.split('T');
-		const endTimeSplit = endTime.split('T');
-
-		const startTimeOnDate: any = new Date(
-			`${startTimeSplit[0]} ${startTimeSplit[1]}`
-		);
-		const endTimeOnDate: any = new Date(
-			`${endTimeSplit[0]} ${endTimeSplit[1]}`
-		);
+		const startTimeOnDate: any = new Date(schedule.start);
+		const endTimeOnDate: any = new Date(schedule.end);
 
 		const differenceTimeInMinutes =
 			(endTimeOnDate - startTimeOnDate) / 60000;
 
-		const scheduleStartTimeSplit = startTimeSplit[1].split(':');
-		const scheduleEndTimeSplit = endTimeSplit[1].split(':');
-
 		return {
-			scheduleStartTime: `${scheduleStartTimeSplit[0]}:${scheduleStartTimeSplit[1]}`,
-			scheduleEndTime: `${scheduleEndTimeSplit[0]}:${scheduleEndTimeSplit[1]}`,
+			scheduleStartTime: schedule.start.slice(11, 18),
+			scheduleEndTime: schedule.end.slice(11, 16),
 			differenceTimeInMinutes,
 		};
 	};

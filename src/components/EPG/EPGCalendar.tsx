@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { MutableRefObject, useContext } from 'react';
 import { UtilsContext } from '../../context/UtilsContext';
 
 type DayType = {
@@ -8,7 +8,7 @@ type DayType = {
 };
 
 interface EPGCalendarProps {
-	calendarRef: any;
+	calendarRef: MutableRefObject<HTMLDivElement>;
 }
 
 const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
