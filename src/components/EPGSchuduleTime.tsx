@@ -3,9 +3,9 @@ interface EPGSchuduleTimeProps {
 }
 
 const EPGSchuduleTime = ({ PIXELS_PER_MIN }: EPGSchuduleTimeProps) => {
-	const generateTimeContainer = () => {
-		const containerWidth = PIXELS_PER_MIN * 60;
+	const containerWidth = PIXELS_PER_MIN * 60;
 
+	const generateTimeContainer = () => {
 		return Array(24)
 			.fill(null)
 			.map((v, i) => (
@@ -15,14 +15,7 @@ const EPGSchuduleTime = ({ PIXELS_PER_MIN }: EPGSchuduleTimeProps) => {
 			));
 	};
 
-	return (
-		<div
-			className="epg-schedule-time"
-			style={{ width: PIXELS_PER_MIN * 60 * 24 + 1 }}
-		>
-			{generateTimeContainer()}
-		</div>
-	);
+	return <div className="epg-schedule-time">{generateTimeContainer()}</div>;
 };
 
 export default EPGSchuduleTime;

@@ -11,6 +11,7 @@
 				height: $row-height;
 				background-color: $grey-dark;
 				border-bottom: 1px solid $grey;
+				box-sizing: border-box;
 
 				img {
 					width: 75px;
@@ -20,9 +21,12 @@
 		}
 
 		.epg-schedules {
-			display: flex;
-			flex-direction: column;
-			// overflow: scroll;
+			overflow: scroll;
+			position: relative;
+
+			&::-webkit-scrollbar {
+				display: none;
+			}
 
 			.epg-schedule-time {
 				display: flex;
@@ -30,10 +34,11 @@
 				height: $row-height;
 
 				.hour {
+					text-align: center;
 					background-color: $grey-dark;
 					border: 1px solid $grey;
 					color: $white;
-					text-align: center;
+					box-sizing: border-box;
 					padding-top: 15px;
 				}
 			}
@@ -42,14 +47,37 @@
 				display: flex;
 
 				.schedule-box {
-					font-size: $text-size;
-					display: flex;
 					height: $row-height;
+					font-size: $text-size;
 					color: $white;
 					background-color: $black;
+					box-sizing: border-box;
 					border-bottom: 1px solid $grey;
 					border-left: 1px solid $grey;
+
+					.title {
+						margin-top: 10px;
+						margin-left: 10px;
+						display: block;
+					}
+					.time {
+						margin-left: 10px;
+						margin-top: 5px;
+						display: block;
+					}
 				}
+
+				.on-live {
+					background-color: $grey-light;
+				}
+			}
+
+			.vertical-line {
+				position: absolute;
+				height: 100%;
+				box-sizing: border-box;
+				border: 1px solid $orange;
+				z-index: 2222;
 			}
 		}
 	}
