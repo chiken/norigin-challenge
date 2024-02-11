@@ -1,21 +1,21 @@
-import EPGChannels from '../components/EPGChannels';
-import EPGSchedules from '../components/EPGSchedules';
+import EPGChannels from './EPGChannels';
+import EPGSchedules from './EPGSchedules';
 
-import { useFetchEPG } from '../hooks/useFetchEPG';
+interface EPGTableProps {
+	data: app.EPGData;
+	loading: boolean;
+	error: boolean;
+}
 
 const PIXELS_PER_MIN = 8;
 
-const EPGContainer = () => {
-	const { data, loading, error } = useFetchEPG();
-
-	if (loading) {
-		return <div> Loading </div>;
-	}
+const EPGTable = ({ data, loading, error }: EPGTableProps) => {
+	if (loading) return 'Loading';
 
 	const channels = data.channels;
 
 	return (
-		<div className="epg-container">
+		<div className="epg-table">
 			<div className="epg-header"></div>
 			<div className="epg-body">
 				<div className="epg-channels">
@@ -32,4 +32,4 @@ const EPGContainer = () => {
 	);
 };
 
-export default EPGContainer;
+export default EPGTable;

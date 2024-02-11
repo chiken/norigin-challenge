@@ -1,8 +1,8 @@
-import EPGContainer from '../containers/EPGContainer';
+import HomeContainer from '../containers/HomeContainer';
 
 export const router = [
 	{
 		path: '/',
-		element: <EPGContainer />,
+		element: <HomeContainer />,
 	},
 ];
