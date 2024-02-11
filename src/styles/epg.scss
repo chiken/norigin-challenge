@@ -2,10 +2,11 @@
 	position: relative;
 
 	.epg-header {
+		display: flex;
+		height: $row-height;
+		background-color: $grey-dark;
+
 		.epg-calendar {
-			height: $row-height;
-			width: 100%;
-			background-color: $grey-dark;
 			display: flex;
 			overflow: scroll;
 
@@ -14,15 +15,13 @@
 			}
 
 			.epg-calendar-day {
-				padding: 0px 40px;
 				display: flex;
-				border-right: 1px solid $grey-light;
 				flex-direction: column;
 				justify-content: center;
 				align-items: center;
+				padding: 0 30px;
 				color: #ccc;
-				width: 400px;
-				height: 60px;
+				border-right: 1px solid $grey-light;
 
 				&.today {
 					color: $white;
@@ -75,7 +74,7 @@
 					border: 1px solid $grey;
 					color: $white;
 					box-sizing: border-box;
-					padding-top: 15px;
+					padding-top: 20px;
 				}
 			}
 

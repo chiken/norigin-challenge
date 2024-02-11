@@ -22,22 +22,44 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 		return (hour * 60 + min) * PIXELS_PER_MIN;
 	};
 
-	const [currentTimeOnPixels, setCurrentTimeOnPixels] = useState(
-		getCurrentTimeOnPixels()
-	);
+	const moveToCurrentTimeOnSchedule = () => {
+		if (scheduleRef.current !== null) {
+			scheduleRef.current.scrollLeft =
+				currentTimeOnPixels + 75 - window.innerWidth / 2;
+		}
+	};
 
-	const scheduleRef = useRef(null);
+	const moveToCurrentTimeOnCalendar = () => {
+		if (calendarRef.current !== null) {
+			const today = new Date();
+			const date = today.getDate();
+			console.log(date);
+
+			calendarRef.current.scrollLeft =
+				date * 98 - 75 - window.innerWidth / 2;
+		}
+	};
+
+	const handleButtonClick = () => {
+		moveToCurrentTimeOnCalendar();
+		moveToCurrentTimeOnSchedule();
+	};
 
 	setInterval(() => {
 		const pixels = getCurrentTimeOnPixels();
 		setCurrentTimeOnPixels(pixels);
 	}, 60000);
 
-	useEffect(() => {}, [currentTimeOnPixels]);
+	const [currentTimeOnPixels, setCurrentTimeOnPixels] = useState(
+		getCurrentTimeOnPixels()
+	);
 
-	const handleGoLiveClick = () => {
-		scheduleRef.current.scrollTo(currentTimeOnPixels, 0);
-	};
+	const scheduleRef = useRef(null);
+	const calendarRef = useRef(null);
+
+	useEffect(() => {
+		moveToCurrentTimeOnSchedule();
+	}, [scheduleRef.current]);
 
 	if (loading) return 'Loading';
 
@@ -46,23 +68,21 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 	return (
 		<div className="epg-table">
 			<div className="epg-header">
-				<EPGCalendar />
+				<EPGCalendar calendarRef={calendarRef} />
 			</div>
 			<div className="epg-body">
-				<div className="epg-channels">
-					<EPGChannels channels={channels} />
-				</div>
-				<div className="epg-schedules">
-					<EPGSchedules
-						channels={channels}
-						PIXELS_PER_MIN={PIXELS_PER_MIN}
-						scheduleRef={scheduleRef}
-						currentTimeOnPixels={currentTimeOnPixels}
-					/>
-				</div>
+				<EPGChannels channels={channels} />
+
+				<EPGSchedules
+					channels={channels}
+					scheduleRef={scheduleRef}
+					PIXELS_PER_MIN={PIXELS_PER_MIN}
+					currentTimeOnPixels={currentTimeOnPixels}
+				/>
+
 				<Button
 					title={'Now'}
-					onClick={handleGoLiveClick}
+					onClick={handleButtonClick}
 					classNames="epg-btn-live"
 				/>
 			</div>

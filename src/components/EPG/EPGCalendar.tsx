@@ -14,7 +14,11 @@ type DayType = {
 	isToday: boolean;
 };
 
-const EPGCalendar = () => {
+interface EPGCalendarProps {
+	calendarRef: any;
+}
+
+const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
 	const getDaysOfMonth = (): DayType[] => {
 		const today = new Date();
 		const year = today.getFullYear();
@@ -57,7 +61,7 @@ const EPGCalendar = () => {
 				className={`epg-calendar-day ${day.isToday ? 'today' : ''}`}
 				key={day.date}
 			>
-				<span> {day.name}</span>
+				<span> {day.name.slice(0, 3)}</span>
 				<span> {day.date}</span>
 			</div>
 		);
@@ -66,14 +70,14 @@ const EPGCalendar = () => {
 	const renderCalendar = () => {
 		const listOfDays = getDaysOfMonth();
 
-		return (
-			<div className="epg-calendar">
-				{listOfDays.map((day) => renderDayOfTheMonth(day))}
-			</div>
-		);
+		return listOfDays.map((day) => renderDayOfTheMonth(day));
 	};
 
-	return <div>{renderCalendar()}</div>;
+	return (
+		<div className="epg-calendar" ref={calendarRef}>
+			{renderCalendar()}
+		</div>
+	);
 };
 
 export default EPGCalendar;

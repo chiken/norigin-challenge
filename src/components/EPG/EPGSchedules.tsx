@@ -6,15 +6,15 @@ import EPGScheduleStick from './EPGScheduleStick';
 interface EPGChannels {
 	channels: app.EPGChannel[];
 	PIXELS_PER_MIN: number;
-	scheduleRef: any;
 	currentTimeOnPixels: number;
+	scheduleRef: any;
 }
 
 const EPGSchedules = ({
 	channels,
 	PIXELS_PER_MIN,
-	scheduleRef,
 	currentTimeOnPixels,
+	scheduleRef,
 }: EPGChannels) => {
 	const scheduleTotalWidth = PIXELS_PER_MIN * 60 * 24;
 
@@ -88,10 +88,12 @@ const EPGSchedules = ({
 	};
 
 	return (
-		<div style={{ width: scheduleTotalWidth }} ref={scheduleRef}>
-			<EPGScheduleStick currentTimeOnPixels={currentTimeOnPixels} />
-			<EPGSchuduleTime PIXELS_PER_MIN={PIXELS_PER_MIN} />
-			{renderEPGSchedules()}
+		<div className="epg-schedules" ref={scheduleRef}>
+			<div style={{ width: scheduleTotalWidth }}>
+				<EPGScheduleStick currentTimeOnPixels={currentTimeOnPixels} />
+				<EPGSchuduleTime PIXELS_PER_MIN={PIXELS_PER_MIN} />
+				{renderEPGSchedules()}
+			</div>
 		</div>
 	);
 };
