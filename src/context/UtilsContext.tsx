@@ -1,17 +1,18 @@
 import { createContext } from 'react';
 
 interface UtilsContextProps {
-	currentDate: any;
-	currentMonth: any;
-	currentYear: any;
-	currentDay: any;
-	currentMonthWith2Digits: any;
-	currentDayWith2Digits: any;
-	daysOfWeek: any;
-	currentDateParsedYMD: any;
-	getParsedWithTwoDigits: any;
-	getDateParsedYMD: any;
-	getCurrentTime: any;
+	currentDate: Date;
+	currentMonth: number;
+	currentYear: number;
+	currentDay: number;
+	currentMonthWith2Digits: string;
+	currentDayWith2Digits: string;
+	daysOfWeek: string[];
+	currentDateParsedYMD: string;
+	getParsedWithTwoDigits: (value: number) => string;
+	getCurrentTimeOnMin: () => number;
+	getDateParsedYMD: (date: Date) => string;
+	getCurrentTime: () => string;
 	PIXELS_PER_MIN: number;
 	CHANNEL_PIXELS_WIDTH: number;
 	DAY_CONTAINER_WIDTH: number;
@@ -47,6 +48,14 @@ const currentDayWith2Digits = getParsedWithTwoDigits(currentDay);
 
 const currentDateParsedYMD = getDateParsedYMD(currentDate);
 
+const getCurrentTimeOnMin = (): number => {
+	const date = new Date();
+	const hour = date.getHours();
+	const min = date.getMinutes();
+
+	return hour * 60 + min;
+};
+
 const daysOfWeek = [
 	'Sunday',
 	'Monday',
@@ -69,7 +78,8 @@ export const utilContextValue = {
 	getParsedWithTwoDigits,
 	getDateParsedYMD,
 	getCurrentTime,
-	PIXELS_PER_MIN: 8,
+	getCurrentTimeOnMin,
+	PIXELS_PER_MIN: 5,
 	CHANNEL_PIXELS_WIDTH: 75,
 	DAY_CONTAINER_WIDTH: 98,
 };

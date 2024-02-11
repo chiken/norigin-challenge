@@ -17,7 +17,6 @@ const EPGChannels = ({ channels }: EPGChannels) => {
 
 	return (
 		<div className="epg-channels">
-			<div className="epg-channel-item"></div>
 			{channels.map((channel, idx) => renderChannelLogo(channel, idx))}
 		</div>
 	);

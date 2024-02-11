@@ -21,12 +21,26 @@
 				align-items: center;
 				padding: 0 30px;
 				color: #ccc;
+				box-sizing: border-box;
 				border-right: 1px solid $grey-light;
 
 				&.today {
 					color: $white;
 					background-color: $grey-light;
 				}
+			}
+		}
+
+		.epg-header-icon {
+			padding-bottom: 60px;
+			border: 1px solid $grey-light;
+			box-sizing: border-box;
+			box-shadow: 10px 0 20px -15px black;
+
+			img {
+				width: 30px;
+				height: 30px;
+				padding: 15px 22.5px;
 			}
 		}
 	}
@@ -37,6 +51,9 @@
 		.epg-channels {
 			display: flex;
 			flex-direction: column;
+			background-color: $grey-dark;
+			z-index: 10;
+			box-shadow: 10px 0 20px -15px black;
 
 			.epg-channel-item {
 				display: flex;
@@ -47,6 +64,10 @@
 				background-color: $grey-dark;
 				border-bottom: 1px solid $grey;
 				box-sizing: border-box;
+
+				&:first-child {
+					margin-top: 60px;
+				}
 
 				img {
 					width: 50px;

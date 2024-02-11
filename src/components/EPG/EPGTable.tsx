@@ -13,15 +13,15 @@ interface EPGTableProps {
 }
 
 const EPGTable = ({ data, loading, error }: EPGTableProps) => {
-	const { PIXELS_PER_MIN, CHANNEL_PIXELS_WIDTH, DAY_CONTAINER_WIDTH } =
-		useContext(UtilsContext);
+	const {
+		PIXELS_PER_MIN,
+		CHANNEL_PIXELS_WIDTH,
+		DAY_CONTAINER_WIDTH,
+		getCurrentTimeOnMin,
+	} = useContext(UtilsContext);
 
 	const getCurrentTimeOnPixels = (): number => {
-		const date = new Date();
-		const hour = date.getHours();
-		const min = date.getMinutes();
-
-		return (hour * 60 + min) * PIXELS_PER_MIN;
+		return getCurrentTimeOnMin() * PIXELS_PER_MIN;
 	};
 
 	const moveToCurrentTimeOnSchedule = () => {
@@ -39,9 +39,7 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 			const date = today.getDate();
 
 			calendarRef.current.scrollLeft =
-				date * DAY_CONTAINER_WIDTH -
-				CHANNEL_PIXELS_WIDTH -
-				window.innerWidth / 2;
+				date * DAY_CONTAINER_WIDTH - window.innerWidth / 2;
 		}
 	};
 
@@ -73,6 +71,12 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 	return (
 		<div className="epg-table">
 			<div className="epg-header">
+				<div className="epg-header-icon">
+					<img
+						src={window.location.origin + '/assets/start-icon.png'}
+						alt={window.location.origin + '/assets/start-icon.png'}
+					/>
+				</div>
 				<EPGCalendar calendarRef={calendarRef} />
 			</div>
 			<div className="epg-body">
