@@ -1,8 +1,9 @@
-interface EPGSchuduleTimeProps {
-	PIXELS_PER_MIN: number;
-}
+import { useContext } from 'react';
+import { UtilsContext } from '../../context/UtilsContext';
 
-const EPGSchuduleTime = ({ PIXELS_PER_MIN }: EPGSchuduleTimeProps) => {
+const EPGSchuduleTime = () => {
+	const { PIXELS_PER_MIN } = useContext(UtilsContext);
+
 	const containerWidth = PIXELS_PER_MIN * 60;
 
 	const generateTimeContainer = () => {

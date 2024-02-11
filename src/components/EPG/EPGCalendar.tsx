@@ -1,12 +1,5 @@
-const daysOfWeek = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
-];
+import { useContext } from 'react';
+import { UtilsContext } from '../../context/UtilsContext';
 
 type DayType = {
 	name: string;
@@ -19,39 +12,37 @@ interface EPGCalendarProps {
 }
 
 const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
+	const {
+		currentMonthWith2Digits,
+		currentDateParsedYMD,
+		getDateParsedYMD,
+		getParsedWithTwoDigits,
+		currentMonth,
+		currentYear,
+		daysOfWeek,
+	} = useContext(UtilsContext);
+
 	const getDaysOfMonth = (): DayType[] => {
-		const today = new Date();
-		const year = today.getFullYear();
-		const month = today.getMonth();
+		const date = new Date(currentYear, currentMonth, 1);
+		let days = [];
 
-		var date = new Date(year, month, 1);
-		var days = [];
+		while (date.getMonth() === currentMonth) {
+			const dateParsedYMD = getDateParsedYMD(date);
 
-		const monthParsed = month < 10 ? `0${month + 1}` : `${month + 1}`;
-
-		while (date.getUTCMonth() === month) {
-			const numberOfTheDay = date.getDate();
-
-			const todayParsed = `${today.getFullYear()}/${
-				today.getMonth() + 1
-			}/${today.getDate()}`;
-
-			const dateParsed = `${date.getFullYear()}/${
-				date.getMonth() + 1
-			}/${date.getDate()}`;
+			const dateFormatted = `${getParsedWithTwoDigits(
+				date.getDate()
+			)}.${currentMonthWith2Digits}`;
 
 			const day = {
-				name: daysOfWeek[date.getDay()],
-				date:
-					numberOfTheDay < 10
-						? `0${numberOfTheDay}.${monthParsed}`
-						: `${numberOfTheDay}.${monthParsed}`,
-				isToday: todayParsed === dateParsed,
+				name: daysOfWeek[date.getDay()].slice(0, 3),
+				date: dateFormatted,
+				isToday: currentDateParsedYMD === dateParsedYMD,
 			};
 
 			days.push(day);
-			date.setUTCDate(date.getUTCDate() + 1);
+			date.setDate(date.getDate() + 1);
 		}
+
 		return days;
 	};
 
@@ -61,7 +52,7 @@ const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
 				className={`epg-calendar-day ${day.isToday ? 'today' : ''}`}
 				key={day.date}
 			>
-				<span> {day.name.slice(0, 3)}</span>
+				<span> {day.name}</span>
 				<span> {day.date}</span>
 			</div>
 		);

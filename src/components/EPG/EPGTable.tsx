@@ -1,9 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 
 import Button from '../Button';
 import EPGChannels from './EPGChannels';
 import EPGSchedules from './EPGSchedules';
 import EPGCalendar from './EPGCalendar';
+import { UtilsContext } from '../../context/UtilsContext';
 
 interface EPGTableProps {
 	data: app.EPGData;
@@ -11,9 +12,10 @@ interface EPGTableProps {
 	error: boolean;
 }
 
-const PIXELS_PER_MIN = 8;
-
 const EPGTable = ({ data, loading, error }: EPGTableProps) => {
+	const { PIXELS_PER_MIN, CHANNEL_PIXELS_WIDTH, DAY_CONTAINER_WIDTH } =
+		useContext(UtilsContext);
+
 	const getCurrentTimeOnPixels = (): number => {
 		const date = new Date();
 		const hour = date.getHours();
@@ -25,7 +27,9 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 	const moveToCurrentTimeOnSchedule = () => {
 		if (scheduleRef.current !== null) {
 			scheduleRef.current.scrollLeft =
-				currentTimeOnPixels + 75 - window.innerWidth / 2;
+				currentTimeOnPixels +
+				CHANNEL_PIXELS_WIDTH -
+				window.innerWidth / 2;
 		}
 	};
 
@@ -33,10 +37,11 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 		if (calendarRef.current !== null) {
 			const today = new Date();
 			const date = today.getDate();
-			console.log(date);
 
 			calendarRef.current.scrollLeft =
-				date * 98 - 75 - window.innerWidth / 2;
+				date * DAY_CONTAINER_WIDTH -
+				CHANNEL_PIXELS_WIDTH -
+				window.innerWidth / 2;
 		}
 	};
 
@@ -76,7 +81,6 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 				<EPGSchedules
 					channels={channels}
 					scheduleRef={scheduleRef}
-					PIXELS_PER_MIN={PIXELS_PER_MIN}
 					currentTimeOnPixels={currentTimeOnPixels}
 				/>
 

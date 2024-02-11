@@ -5,10 +5,14 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './index.scss';
 
 import { router } from './routes';
+import { UtilsContextProvider, utilContextValue } from './context/UtilsContext';
+
 const createRouter = createBrowserRouter(router);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
 	<React.StrictMode>
-		<RouterProvider router={createRouter} />
+		<UtilsContextProvider value={utilContextValue}>
+			<RouterProvider router={createRouter} />
+		</UtilsContextProvider>
 	</React.StrictMode>
 );

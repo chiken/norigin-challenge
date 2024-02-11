@@ -1,33 +1,25 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext } from 'react';
+import { UtilsContext } from '../../context/UtilsContext';
 
 import EPGSchuduleTime from './EPGSchuduleTime';
 import EPGScheduleStick from './EPGScheduleStick';
 
 interface EPGChannels {
 	channels: app.EPGChannel[];
-	PIXELS_PER_MIN: number;
 	currentTimeOnPixels: number;
 	scheduleRef: any;
 }
 
 const EPGSchedules = ({
 	channels,
-	PIXELS_PER_MIN,
 	currentTimeOnPixels,
 	scheduleRef,
 }: EPGChannels) => {
+	const { getCurrentTime, PIXELS_PER_MIN } = useContext(UtilsContext);
+
 	const scheduleTotalWidth = PIXELS_PER_MIN * 60 * 24;
 
-	const getCurrentTime = (): string => {
-		const date = new Date();
-
-		const min = ('0' + date.getMinutes()).slice(-2);
-		const hour = ('0' + date.getHours()).slice(-2);
-
-		return `${hour}:${min}:${date.getSeconds()}`;
-	};
-
-	const calculateTimeDifferenceInMinutes = (schedule: app.EPGSchedule) => {
+	const calculateScheduleDuration = (schedule: app.EPGSchedule) => {
 		const startTime = schedule.start.split('+')[0];
 		const endTime = schedule.end.split('+')[0];
 
@@ -41,30 +33,38 @@ const EPGSchedules = ({
 			`${endTimeSplit[0]} ${endTimeSplit[1]}`
 		);
 
-		const differenceTime = (endTimeOnDate - startTimeOnDate) / 60000;
+		const differenceTimeInMinutes =
+			(endTimeOnDate - startTimeOnDate) / 60000;
+
+		const scheduleStartTimeSplit = startTimeSplit[1].split(':');
+		const scheduleEndTimeSplit = endTimeSplit[1].split(':');
 
 		return {
-			scheduleStartTime: startTimeSplit[1],
-			scheduleEndTime: endTimeSplit[1],
-			differenceTime,
+			scheduleStartTime: `${scheduleStartTimeSplit[0]}:${scheduleStartTimeSplit[1]}`,
+			scheduleEndTime: `${scheduleEndTimeSplit[0]}:${scheduleEndTimeSplit[1]}`,
+			differenceTimeInMinutes,
 		};
 	};
 
 	const renderEPGSchedule = (schedules: app.EPGSchedule[]) => {
 		return schedules.map((schedule, idx) => {
-			const { scheduleStartTime, scheduleEndTime, differenceTime } =
-				calculateTimeDifferenceInMinutes(schedule);
+			const {
+				scheduleStartTime,
+				scheduleEndTime,
+				differenceTimeInMinutes,
+			} = calculateScheduleDuration(schedule);
 
 			const currentTime = getCurrentTime();
 
 			const isOnLive =
 				scheduleStartTime <= currentTime &&
 				scheduleEndTime >= currentTime;
+
 			return (
 				<div
 					className={`schedule-box ${isOnLive ? 'on-live' : ''}`}
 					key={idx}
-					style={{ width: PIXELS_PER_MIN * differenceTime }}
+					style={{ width: PIXELS_PER_MIN * differenceTimeInMinutes }}
 				>
 					<span className="title"> {schedule.title} </span>
 					<span className="time">
@@ -91,7 +91,7 @@ const EPGSchedules = ({
 		<div className="epg-schedules" ref={scheduleRef}>
 			<div style={{ width: scheduleTotalWidth }}>
 				<EPGScheduleStick currentTimeOnPixels={currentTimeOnPixels} />
-				<EPGSchuduleTime PIXELS_PER_MIN={PIXELS_PER_MIN} />
+				<EPGSchuduleTime />
 				{renderEPGSchedules()}
 			</div>
 		</div>
