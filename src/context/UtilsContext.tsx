@@ -13,6 +13,7 @@ interface UtilsContextProps {
 	getCurrentTimeOnMin: () => number;
 	getDateParsedYMD: (date: Date) => string;
 	getCurrentTime: () => string;
+	getAssetUrlFromPublic: (assetNAme: string) => string;
 	PIXELS_PER_MIN: number;
 	CHANNEL_PIXELS_WIDTH: number;
 	DAY_CONTAINER_WIDTH: number;
@@ -38,6 +39,18 @@ const getCurrentTime = (): string => {
 	return `${hour}:${min}:${date.getSeconds()}`;
 };
 
+const getCurrentTimeOnMin = (): number => {
+	const date = new Date();
+	const hour = date.getHours();
+	const min = date.getMinutes();
+
+	return hour * 60 + min;
+};
+
+const getAssetUrlFromPublic = (assetName: string): string => {
+	return './assets/' + assetName;
+};
+
 const currentDate = new Date();
 const currentMonth = currentDate.getMonth();
 const currentYear = currentDate.getFullYear();
@@ -47,14 +60,6 @@ const currentMonthWith2Digits = getParsedWithTwoDigits(currentMonth + 1);
 const currentDayWith2Digits = getParsedWithTwoDigits(currentDay);
 
 const currentDateParsedYMD = getDateParsedYMD(currentDate);
-
-const getCurrentTimeOnMin = (): number => {
-	const date = new Date();
-	const hour = date.getHours();
-	const min = date.getMinutes();
-
-	return hour * 60 + min;
-};
 
 const daysOfWeek = [
 	'Sunday',
@@ -79,6 +84,7 @@ export const utilContextValue = {
 	getDateParsedYMD,
 	getCurrentTime,
 	getCurrentTimeOnMin,
+	getAssetUrlFromPublic,
 	PIXELS_PER_MIN: 5,
 	CHANNEL_PIXELS_WIDTH: 75,
 	DAY_CONTAINER_WIDTH: 98,
