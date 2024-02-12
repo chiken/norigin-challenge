@@ -1,16 +1,13 @@
-import { useContext } from 'react';
-
-import { UtilsContext } from '../context/UtilsContext';
+import ImageComponent from './ImageComponent';
 
 const NavbarComponent = () => {
-	const { getAssetUrlFromPublic } = useContext(UtilsContext);
 	return (
 		<div className="navbar">
-			<img
-				className="navbar-icon"
-				src={getAssetUrlFromPublic('norigin-icon.webp')}
-				alt={getAssetUrlFromPublic('norigin-icon.webp')}
+			<ImageComponent
+				assetName="norigin-icon.webp"
+				classNames="navbar-icon"
 			/>
+
 			<span className="navbar-title"> Norigin Challenge </span>
 		</div>
 	);

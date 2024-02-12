@@ -1,13 +1,10 @@
-import { useContext } from 'react';
-
-import { UtilsContext } from '../../context/UtilsContext';
+import ImageComponent from '../ImageComponent';
 
 interface EPGChannels {
 	channels: app.EPGChannel[];
 }
 
-const EPGChannels = ({ channels }: EPGChannels) => {
-	const { getAssetUrlFromPublic } = useContext(UtilsContext);
+const EPGChannelsComponent = ({ channels }: EPGChannels) => {
 	const renderChannelLogo = (channel: app.EPGChannel, idx: number) => {
 		/*
 			For this img we should use channel.imgaes.logo
@@ -15,10 +12,9 @@ const EPGChannels = ({ channels }: EPGChannels) => {
 		*/
 		return (
 			<div key={idx} className="epg-channel-item">
-				<img
-					className="epg-channel-logo"
-					src={getAssetUrlFromPublic('norigin-icon.webp')}
-					alt={getAssetUrlFromPublic('norigin-icon.webp')}
+				<ImageComponent
+					assetName="norigin-icon.webp"
+					classNames="epg-channel-logo"
 				/>
 			</div>
 		);
@@ -31,4 +27,4 @@ const EPGChannels = ({ channels }: EPGChannels) => {
 	);
 };
 
-export default EPGChannels;
+export default EPGChannelsComponent;

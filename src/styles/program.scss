@@ -13,13 +13,14 @@
 		margin-left: 20px;
 		display: flex;
 		flex-direction: column;
+		height: 100%;
 
 		.title {
 			font-size: 40px;
 			font-weight: bold;
 		}
 
-		.button {
+		.watch-button {
 			background-color: $grey-light;
 			padding: 15px 0;
 			border-radius: 15px;
@@ -30,11 +31,27 @@
 
 		.description {
 			margin-top: 20px;
+			margin-bottom: 100px;
 		}
 
 		.year {
 			margin: 10px 0px;
 			font-size: 20px;
+		}
+
+		.back-button {
+			background-color: $grey-light;
+			padding: 15px 0;
+			border-radius: 15px;
+			color: $white;
+			border: none;
+			width: 150px;
+			margin: auto;
+		}
+
+		.back-button:hover,
+		.watch-button:hover {
+			cursor: pointer;
 		}
 	}
 }
@@ -52,7 +69,8 @@
 				margin-top: 20px;
 			}
 
-			.button {
+			.description {
+				margin-bottom: 40px;
 			}
 		}
 	}

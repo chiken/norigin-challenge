@@ -4,7 +4,7 @@ interface ButtonProps {
 	classNames?: string;
 }
 
-const Button = ({ title, onClick, classNames }: ButtonProps) => {
+const ButtonComponent = ({ title, onClick, classNames }: ButtonProps) => {
 	const handleClick = () => {
 		onClick();
 	};
@@ -16,4 +16,4 @@ const Button = ({ title, onClick, classNames }: ButtonProps) => {
 	);
 };
 
-export default Button;
+export default ButtonComponent;

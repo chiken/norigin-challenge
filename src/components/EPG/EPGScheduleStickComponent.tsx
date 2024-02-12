@@ -2,7 +2,9 @@ interface EPGScheduleStickProps {
 	currentTimeOnPixels: number;
 }
 
-const EPGScheduleStick = ({ currentTimeOnPixels }: EPGScheduleStickProps) => {
+const EPGScheduleStickComponent = ({
+	currentTimeOnPixels,
+}: EPGScheduleStickProps) => {
 	return (
 		<div
 			style={{ left: currentTimeOnPixels }}
@@ -11,4 +13,4 @@ const EPGScheduleStick = ({ currentTimeOnPixels }: EPGScheduleStickProps) => {
 	);
 };
 
-export default EPGScheduleStick;
+export default EPGScheduleStickComponent;

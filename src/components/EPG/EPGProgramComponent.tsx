@@ -7,7 +7,7 @@ interface EPGProgramProps {
 	schedule: app.EPGProgram[];
 }
 
-const EPGProgram = ({ schedule }: EPGProgramProps) => {
+const EPGProgramComponent = ({ schedule }: EPGProgramProps) => {
 	const { getCurrentTime, PIXELS_PER_MIN } = useContext(UtilsContext);
 	const navigate = useNavigate();
 
@@ -56,4 +56,4 @@ const EPGProgram = ({ schedule }: EPGProgramProps) => {
 	return <>{schedule.map(renderScheduleProgram)}</>;
 };
 
-export default EPGProgram;
+export default EPGProgramComponent;

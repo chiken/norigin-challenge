@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext } from 'react';
 
-import Button from '../Button';
-import EPGChannels from './EPGChannels';
-import EPGSchedules from './EPGSchedules';
-import EPGCalendar from './EPGCalendar';
+import ButtonComponent from '../ButtonComponent';
+import EPGChannelsComponent from './EPGChannelsComponent';
+import EPGSchedulesComponent from './EPGSchedulesComponent';
+import EPGCalendarComponent from './EPGCalendarComponent';
 import { UtilsContext } from '../../context/UtilsContext';
 
 interface EPGTableProps {
@@ -12,7 +12,7 @@ interface EPGTableProps {
 	error: boolean;
 }
 
-const EPGTable = ({ data, loading, error }: EPGTableProps) => {
+const EPGTableComponent = ({ data, loading, error }: EPGTableProps) => {
 	const {
 		PIXELS_PER_MIN,
 		CHANNEL_PIXELS_WIDTH,
@@ -80,19 +80,19 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 						alt={window.location.origin + '/assets/start-icon.png'}
 					/>
 				</div>
-				<EPGCalendar calendarRef={calendarRef} />
+				<EPGCalendarComponent calendarRef={calendarRef} />
 			</div>
 			<div className="epg-body">
-				<EPGChannels channels={channels} />
+				<EPGChannelsComponent channels={channels} />
 
-				<EPGSchedules
+				<EPGSchedulesComponent
 					channels={channels}
 					setScheduleRefChanged={setScheduleRefChanged}
 					scheduleRef={scheduleRef}
 					currentTimeOnPixels={currentTimeOnPixels}
 				/>
 
-				<Button
+				<ButtonComponent
 					title={'Now'}
 					onClick={handleButtonClick}
 					classNames="epg-btn-live"
@@ -102,4 +102,4 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 	);
 };
 
-export default EPGTable;
+export default EPGTableComponent;

@@ -11,7 +11,7 @@ interface EPGCalendarProps {
 	calendarRef: MutableRefObject<HTMLDivElement>;
 }
 
-const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
+const EPGCalendarComponent = ({ calendarRef }: EPGCalendarProps) => {
 	const {
 		currentMonthWith2Digits,
 		currentDateParsedYMD,
@@ -71,4 +71,4 @@ const EPGCalendar = ({ calendarRef }: EPGCalendarProps) => {
 	);
 };
 
-export default EPGCalendar;
+export default EPGCalendarComponent;

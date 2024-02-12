@@ -1,5 +1,5 @@
 import { useFetch } from '../hooks/useFetch';
-import EPGTable from '../components/EPG/EPGTable';
+import EPGTableComponent from '../components/EPG/EPGTableComponent';
 
 const HomeContainer = () => {
 	const { data, loading, error } = useFetch('http://localhost:1337/epg');
@@ -8,7 +8,7 @@ const HomeContainer = () => {
 
 	return (
 		<div className="home">
-			<EPGTable data={data} loading={loading} error={error} />
+			<EPGTableComponent data={data} loading={loading} error={error} />
 		</div>
 	);
 };

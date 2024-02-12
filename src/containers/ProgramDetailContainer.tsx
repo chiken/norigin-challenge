@@ -1,13 +1,12 @@
-import { useParams } from 'react-router-dom';
-import { useContext } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import { useFetchProgram } from '../hooks/useFetchProgram';
-import { UtilsContext } from '../context/UtilsContext';
-import Button from '../components/Button';
+import ButtonComponent from '../components/ButtonComponent';
+import ImageComponent from '../components/ImageComponent';
 
 const ProgramDetailContainer = () => {
-	const { getAssetUrlFromPublic } = useContext(UtilsContext);
 	const { id } = useParams();
+	const navigate = useNavigate();
 
 	const { data, loading, error } = useFetchProgram(id);
 
@@ -21,25 +20,30 @@ const ProgramDetailContainer = () => {
 		lastTimePosition,
 	} = data;
 
-	const buttonTitle = parseInt(lastTimePosition) > 0 ? 'Resume' : 'Watch';
+	const buttonTitle = parseInt(lastTimePosition) > 0 ? 'RESUME' : 'WATCH';
 
 	return (
 		<div className="program-detail">
-			<img
-				className="program-img"
-				src={getAssetUrlFromPublic('movie-img.jpeg')}
-				alt={getAssetUrlFromPublic('movie-img.jpeg')}
+			<ImageComponent
+				assetName="movie-img.jpeg"
+				classNames="program-img"
 			/>
 
 			<div className="program-content">
 				<span className="title"> {title} </span>
 				<span className="year"> Released year: {year} </span>
-				<Button
+				<ButtonComponent
 					title={buttonTitle}
 					onClick={() => {}}
-					classNames="button"
+					classNames="watch-button"
 				/>
 				<span className="description"> {description} </span>
+
+				<ButtonComponent
+					title="BACK"
+					onClick={() => navigate(-1)}
+					classNames="back-button"
+				/>
 			</div>
 		</div>
 	);

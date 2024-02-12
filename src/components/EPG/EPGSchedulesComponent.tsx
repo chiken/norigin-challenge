@@ -1,9 +1,9 @@
 import { MutableRefObject, useContext } from 'react';
 
 import { UtilsContext } from '../../context/UtilsContext';
-import EPGSchuduleTime from './EPGSchuduleTime';
-import EPGScheduleStick from './EPGScheduleStick';
-import EPGProgram from './EPGProgram';
+import EPGSchuduleTimeComponent from './EPGSchuduleTimeComponent';
+import EPGScheduleStickComponent from './EPGScheduleStickComponent';
+import EPGProgramComponent from './EPGProgramComponent';
 
 interface EPGChannelProps {
 	channels: app.EPGChannel[];
@@ -12,7 +12,7 @@ interface EPGChannelProps {
 	setScheduleRefChanged: any;
 }
 
-const EPGSchedules = ({
+const EPGSchedulesComponent = ({
 	channels,
 	currentTimeOnPixels,
 	scheduleRef,
@@ -26,7 +26,7 @@ const EPGSchedules = ({
 			<>
 				{channels.map(({ schedules }, idx) => (
 					<div key={idx} className="epg-schedule-row">
-						<EPGProgram schedule={schedules} />
+						<EPGProgramComponent schedule={schedules} />
 					</div>
 				))}
 			</>
@@ -43,10 +43,10 @@ const EPGSchedules = ({
 				}}
 			>
 				<div style={{ width: scheduleTotalWidth }}>
-					<EPGScheduleStick
+					<EPGScheduleStickComponent
 						currentTimeOnPixels={currentTimeOnPixels}
 					/>
-					<EPGSchuduleTime />
+					<EPGSchuduleTimeComponent />
 					{renderEPGSchedules()}
 				</div>
 			</div>
@@ -54,4 +54,4 @@ const EPGSchedules = ({
 	);
 };
 
-export default EPGSchedules;
+export default EPGSchedulesComponent;
