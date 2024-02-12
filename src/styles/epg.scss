@@ -100,10 +100,10 @@
 				}
 			}
 
-			.epg-schedule {
+			.epg-schedule-row {
 				display: flex;
 
-				.schedule-box {
+				.epg-program {
 					height: $row-height;
 					font-size: $text-size;
 					color: $white;

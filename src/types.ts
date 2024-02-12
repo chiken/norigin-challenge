@@ -1,5 +1,5 @@
 namespace app {
-	export interface EPGSchedule {
+	export interface EPGProgram {
 		title: string;
 		id: string;
 		start: string;
@@ -10,7 +10,7 @@ namespace app {
 		id: string;
 		title: string;
 		images: { logo: string };
-		schedules: EPGSchedule[];
+		schedules: EPGProgram[];
 	}
 
 	export interface EPGData {
