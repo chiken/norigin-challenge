@@ -69,8 +69,6 @@ const EPGTable = ({ data, loading, error }: EPGTableProps) => {
 	const scheduleRef = useRef(null);
 	const calendarRef = useRef(null);
 
-	if (loading) return <div></div>;
-
 	const { channels } = data;
 
 	return (
