@@ -55,10 +55,14 @@ const EPGTableComponent = ({ data, loading, error }: EPGTableProps) => {
 	const [scheduleRefChanged, setScheduleRefChanged] = useState(false);
 
 	useEffect(() => {
-		setInterval(() => {
+		const interval = setInterval(() => {
 			const pixels = getCurrentTimeOnPixels();
 			setCurrentTimeOnPixels(pixels);
 		}, 60000);
+
+		return () => {
+			clearInterval(interval);
+		};
 	}, []);
 
 	useEffect(() => {

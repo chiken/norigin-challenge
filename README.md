@@ -28,3 +28,7 @@ With http-server we will be able to see the producction build on [http://localho
 We will need to run two commands on different consoles for this. On one console we should run `npm run start:api` to make the backend service work
 
 And on the other console we will start our React project with the command `npm run start`
+
+## Final result
+
+![Alt text](./final-design.png?raw=true)
